@@ -6,35 +6,40 @@ class App extends Component {
       super(props);
       this.state = {
         user: '',
-        password:''
+        password:'',
+        errorMessage:''
       };
-    this.handleSubmit = this.handleSubmit.bind(this);
+       this.handleUserIdInput=(event) => {
+        this.setState({user:event.target.value});
       }
 
-  handleSubmit(event){
-    if((this.state.user === 'admin')  && (this.state.password === 'admin')){
-      <Welcome />
+       this.handlePasswordInput=(event) => {
+        this.setState({password:event.target.value});
+      }
+       this.handleSubmit=(event) =>{
+         if((this.state.user === 'admin')  && (this.state.password === 'admin')){
+          
+         
     }
-    else {
-      alert('error:Wrong Credentials');
+       else {
+         this.setState({errorMessage:'Wrong Credentials'});
       }
     }
-
+  }     
   render() {
     return (
-       <form onSubmit={this.handleSubmit}>
-         <label>
-           Username:
-           <input type="text"    name="user" /><br/><br/>
-           Password:
-           <input type="password"   name="password" /><br/><br/>
-         </label>
-           <input type="submit" value="Submit" />
-      </form>
+          <div>
+            <p>{this.state.errorMessage}</p>
+            Username:
+            <input type="text"    value={this.state.user} onChange={this.handleUserIdInput}/><br/><br/>
+            Password:
+            <input type="password"   value={this.state.password} onChange={this.handlePasswordInput}/><br/><br/>
+            <button onClick={this.handleSubmit}>Login</button>
+
+          </div>
     );
   }
 }
-
 export default App;
 
 
